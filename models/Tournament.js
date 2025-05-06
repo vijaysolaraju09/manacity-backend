@@ -1,19 +1,23 @@
 const mongoose = require("mongoose");
 
-const tournamentSchema = new mongoose.Schema(
+const TournamentSchema = new mongoose.Schema(
   {
-    name: String,
+    title: String,
+    description: String,
     category: String,
-    image: String,
-    maxParticipants: Number,
-    registered: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
-    approved: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+    date: String,
+    time: String,
+    location: String,
+    status: {
+      type: String,
+      enum: ["upcoming", "ongoing", "completed"],
+      default: "upcoming",
+    },
+    participants: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+    winner: { type: String, default: "" },
     adminMessage: String,
-    registrationEndsAt: Date,
-    tournamentStartsAt: Date,
-    tournamentEndsAt: Date,
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Tournament", tournamentSchema);
+module.exports = mongoose.model("Tournament", TournamentSchema);
