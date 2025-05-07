@@ -28,6 +28,8 @@ exports.signup = async (req, res) => {
 
 exports.login = async (req, res) => {
   const { phone, password } = req.body;
+  console.log(phone, password);
+
   try {
     const user = await User.findOne({ phone });
     if (!user) return res.status(400).json({ msg: "Invalid credentials" });
